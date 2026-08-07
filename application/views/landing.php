@@ -33,79 +33,8 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
     
-    <style>
-        .hero-section {
-            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
-            color: white;
-            padding: 120px 0 80px 0;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-        }
-        .hero-title {
-            font-weight: 800;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-        .hero-subtitle {
-            font-size: 1.25rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        .feature-icon {
-            font-size: 3rem;
-            color: #4e73df;
-            margin-bottom: 20px;
-        }
-        .feature-box {
-            padding: 40px 20px;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: white;
-            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-            height: 100%;
-        }
-        .feature-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
-        }
-        .navbar-brand img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        .navbar-brand {
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-        .btn-custom-light {
-            background-color: white;
-            color: #4e73df;
-            font-weight: bold;
-            border-radius: 30px;
-            padding: 12px 35px;
-            transition: all 0.3s;
-        }
-        .btn-custom-light:hover {
-            background-color: #f8f9fc;
-            color: #224abe;
-            transform: scale(1.05);
-            text-decoration: none;
-        }
-        .btn-custom-outline {
-            border: 2px solid white;
-            color: white;
-            font-weight: bold;
-            border-radius: 30px;
-            padding: 10px 30px;
-            transition: all 0.3s;
-        }
-        .btn-custom-outline:hover {
-            background-color: white;
-            color: #4e73df;
-            text-decoration: none;
-        }
-    </style>
+    <!-- Custom Global CSS -->
+    <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -125,12 +54,21 @@
                     <li class="nav-item mx-2">
                         <a class="nav-link font-weight-bold" href="#features">Fitur</a>
                     </li>
+                    <?php if(isset($is_logged_in) && $is_logged_in): ?>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link font-weight-bold" href="<?= base_url('user'); ?>">Dashboard (<?= $user['name'] ?>)</a>
+                    </li>
+                    <li class="nav-item mx-2 mt-2 mt-lg-0">
+                        <a class="btn btn-light btn-sm font-weight-bold text-danger rounded-pill px-4 py-2" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    </li>
+                    <?php else: ?>
                     <li class="nav-item mx-2">
                         <a class="nav-link font-weight-bold" href="<?= base_url('auth'); ?>">Login</a>
                     </li>
                     <li class="nav-item mx-2 mt-2 mt-lg-0">
                         <a class="btn btn-light btn-sm font-weight-bold text-primary rounded-pill px-4 py-2" href="<?= base_url('auth/registration'); ?>">Daftar Gratis</a>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -145,8 +83,12 @@
                     <h1 class="hero-title">Kendalikan Keuanganmu<br>Wujudkan Mimpimu.</h1>
                     <p class="hero-subtitle">Saqoe adalah platform pencatatan keuangan cerdas yang didesain khusus untuk melacak pengeluaran harian dan mengatur budget event Anda dengan sangat mudah, presisi, dan elegan.</p>
                     <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+                        <?php if(isset($is_logged_in) && $is_logged_in): ?>
+                        <a href="<?= base_url('user'); ?>" class="btn-custom-light mx-2 mb-3 shadow">Lanjutkan ke Dashboard</a>
+                        <?php else: ?>
                         <a href="<?= base_url('auth/registration'); ?>" class="btn-custom-light mx-2 mb-3 shadow">Mulai Sekarang</a>
                         <a href="<?= base_url('auth'); ?>" class="btn-custom-outline mx-2 mb-3">Login Akun</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -192,6 +134,27 @@
             <span class="text-muted font-weight-bold">Copyright &copy; Saqoe <?= date('Y'); ?>. All Rights Reserved.</span>
         </div>
     </footer>
+
+    <!-- Logout Modal-->
+    <?php if(isset($is_logged_in) && $is_logged_in): ?>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="<?= base_url('auth/logout'); ?>">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>

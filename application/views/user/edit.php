@@ -37,6 +37,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="limit_bulanan" class="col-sm-2 col-form-label">Batas Pengeluaran Bulanan (Limit)</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                        </div>
+                        <input type="text" class="form-control input-rupiah" id="limit_bulanan" name="limit_bulanan" value="<?= number_format($user['limit_bulanan'] ?? 0, 0, ',', '.'); ?>">
+                    </div>
+                    <small class="form-text text-muted">Akan muncul peringatan di dashboard jika pengeluaran melebihi limit (Isi 0 jika tidak ada batas).</small>
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-2">Picture</div>
                 <div class="col-sm-10">
                     <div class="row">

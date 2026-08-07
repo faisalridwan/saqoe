@@ -10,9 +10,12 @@ class Landing extends CI_Controller
 
 	public function index()
 	{
-		// Jika user sudah login, langsung arahkan ke Dashboard
+		$data['title'] = 'Saqoe - Manajemen Keuangan Cerdas';
+		$data['is_logged_in'] = false;
+
 		if ($this->session->userdata('username')) {
-			redirect('user');
+			$data['is_logged_in'] = true;
+			$data['user'] = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
 		}
 
 		$data['title'] = 'Saqoe - Manajemen Keuangan Cerdas';

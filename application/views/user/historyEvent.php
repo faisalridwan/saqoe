@@ -15,6 +15,8 @@
                             <th>Tanggal</th>
                             <th>Jam</th>
                             <th>Nama Event</th>
+                            <th>Nama Transaksi</th>
+                            <th>Tipe</th>
                             <th>Kategori</th>
                             <th>Pemasukan</th>
                             <th>Pengeluaran</th>
@@ -27,6 +29,7 @@
                             <td><?= $h['tanggal']; ?></td>
                             <td><?= $h['jam']; ?></td>
                             <td><?= $h['namaEvent']; ?></td>
+                            <td><?= $h['namaPemaPengEvent']; ?></td>
                             <td>
                                 <?php if($h['kategoriEvent'] == 'Pemasukan'): ?>
                                     <span class="badge badge-success"><?= $h['kategoriEvent']; ?></span>
@@ -34,8 +37,9 @@
                                     <span class="badge badge-warning"><?= $h['kategoriEvent']; ?></span>
                                 <?php endif; ?>
                             </td>
-                            <td>Rp. <?= number_format($h['pemasukan'], 0, ',', '.'); ?></td>
-                            <td>Rp. <?= number_format($h['pengeluaran'], 0, ',', '.'); ?></td>
+                            <td><?= $h['kategoriPengeluaranE'] ?? '-'; ?></td>
+                            <td>Rp. <?= number_format($h['pemasukanEvent'], 0, ',', '.'); ?></td>
+                            <td>Rp. <?= number_format($h['pengeluaranEvent'], 0, ',', '.'); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

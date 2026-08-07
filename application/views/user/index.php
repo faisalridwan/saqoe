@@ -7,6 +7,25 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
 
+    <!-- Budget Limit Warning -->
+    <?php if (isset($user['limit_bulanan']) && $user['limit_bulanan'] > 0 && $total_pengeluaran > $user['limit_bulanan']): ?>
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>Peringatan!</strong> Total pengeluaran Anda bulan ini (Rp. <?= number_format($total_pengeluaran, 0, ',', '.'); ?>) telah melebihi batas yang Anda tetapkan (Rp. <?= number_format($user['limit_bulanan'], 0, ',', '.'); ?>).
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php elseif (isset($user['limit_bulanan']) && $user['limit_bulanan'] > 0 && $total_pengeluaran >= ($user['limit_bulanan'] * 0.8)): ?>
+    <div class="alert alert-warning alert-dismissible fade show shadow-sm" role="alert">
+        <i class="fas fa-exclamation-circle"></i>
+        <strong>Hati-hati!</strong> Pengeluaran Anda hampir mencapai batas. Tersisa Rp. <?= number_format($user['limit_bulanan'] - $total_pengeluaran, 0, ',', '.'); ?> lagi dari batas bulanan Anda.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif; ?>
+
     <!-- Content Row -->
     <div class="row">
 
@@ -88,8 +107,33 @@
         </div>
     </div>
 
-    <!-- Content Row -->
+    <!-- Content Row (Dompet) -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h6 class="m-0 font-weight-bold text-primary mb-3">Rincian Dompet & Rekening</h6>
+            <div class="row">
+                <?php foreach ($list_dompet as $d) : ?>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card bg-primary text-white shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1"><?= $d['nama_dompet']; ?></div>
+                                    <div class="h5 mb-0 font-weight-bold">Rp. <?= number_format($d['saldo'], 0, ',', '.'); ?></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-wallet fa-2x text-white-50"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 
+    <!-- Content Row -->
     <div class="row">
 
         <!-- Area Chart -->

@@ -23,21 +23,40 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Nama Event</label>
+                    <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="namaEvent" name="namaEvent" value="<?= $eventt['namaEvent'] ?>" readonly>
+                        <select name="namaEvent" id="namaEvent" class="form-control select2" required onchange="document.getElementById('budgetSekarang').value = this.options[this.selectedIndex].getAttribute('data-budget');">
+                            <option value="" data-budget="0">-- Pilih Event --</option>
+                            <?php foreach ($events as $e) : ?>
+                                <option value="<?= $e['namaEvent']; ?>" data-budget="<?= number_format($e['budget'], 0, ',', '.'); ?>"><?= $e['namaEvent']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?= form_error('namaEvent', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Budget Sekarang</label>
+                    <label for="budgetSekarang" class="col-sm-2 col-form-label">Budget Sekarang</label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Rp.</span>
                             </div>
-                            <input type="text" class="form-control" id="budgetSekarang" name="budgetSekarang" value="<?= number_format($eventt['budget'], 0, ',', '.'); ?>" readonly>
+                            <input type="text" class="form-control" id="budgetSekarang" name="budgetSekarang" value="0" readonly>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
+                    <div class="col-sm-10">
+                        <select name="kategori" id="kategori" class="form-control select2" required>
+                            <option value="">-- Pilih Kategori --</option>
+                            <?php foreach ($kategori_pemasukan as $k) : ?>
+                                <option value="<?= $k['nama_kategori']; ?>"><?= $k['nama_kategori']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?= form_error('kategori', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 

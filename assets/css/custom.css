@@ -1,0 +1,111 @@
+/* Custom Active Menu Styling for Sidebar */
+.sidebar .nav-item.active .nav-link {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    margin: 0.3rem 1rem;
+    width: auto;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-item.active .nav-link i {
+    color: #fff !important;
+}
+
+/* Landing Page Styling */
+.hero-section {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+    padding: 120px 0 80px 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+.hero-title {
+    font-weight: 800;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+.feature-icon {
+    font-size: 3rem;
+    color: #4e73df;
+    margin-bottom: 20px;
+}
+.feature-box {
+    padding: 40px 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    height: 100%;
+}
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+}
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.btn-custom-light {
+    background-color: white;
+    color: #4e73df;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 12px 35px;
+    transition: all 0.3s;
+}
+.btn-custom-light:hover {
+    background-color: #f8f9fc;
+    color: #224abe;
+    transform: scale(1.05);
+    text-decoration: none;
+}
+.btn-custom-outline {
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 10px 30px;
+    transition: all 0.3s;
+}
+.btn-custom-outline:hover {
+    background-color: white;
+    color: #4e73df;
+    text-decoration: none;
+}
+
+/* Custom 404 Error Page Styling */
+.error-page-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fc;
+    text-align: center;
+}
+.error-page-container .error {
+    font-size: 7rem;
+    font-weight: 900;
+    color: #4e73df;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+.error-page-container p.lead {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #5a5c69;
+}
+.error-page-container .text-gray-500 {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}

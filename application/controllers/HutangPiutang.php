@@ -16,9 +16,14 @@ class HutangPiutang extends CI_Controller
         $data['title'] = 'Manajemen Hutang & Piutang';
         $data['user'] = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
         
-        $this->db->where('username', $this->session->userdata('username'));
+        $this->db->select('hutang_piutang.*, dompet.nama_dompet');
+        $this->db->from('hutang_piutang');
+        $this->db->join('dompet', 'dompet.id_dompet = hutang_piutang.id_dompet', 'left');
+        $this->db->where('hutang_piutang.username', $this->session->userdata('username'));
         $this->db->order_by('tanggal_pinjam', 'DESC');
-        $data['catatan'] = $this->db->get('hutang_piutang')->result_array();
+        $data['catatan'] = $this->db->get()->result_array();
+
+        $data['list_dompet'] = $this->db->get_where('dompet', ['username' => $this->session->userdata('username')])->result_array();
 
         // Hitung total hutang dan piutang
         $data['total_hutang'] = 0;
@@ -41,6 +46,7 @@ class HutangPiutang extends CI_Controller
 
     public function tambah()
     {
+        $id_dompet = $this->input->post('id_dompet');
         $data = [
             'username' => $this->session->userdata('username'),
             'jenis' => $this->input->post('jenis'),
@@ -48,18 +54,34 @@ class HutangPiutang extends CI_Controller
             'nominal' => preg_replace('/[^0-9]/', '', $this->input->post('nominal')),
             'tanggal_pinjam' => $this->input->post('tanggal_pinjam'),
             'jatuh_tempo' => $this->input->post('jatuh_tempo') ?: NULL,
-            'status' => 'Belum Lunas'
+            'status' => 'Belum Lunas',
+            'id_dompet' => $id_dompet
         ];
 
-        // Jika jenisnya Piutang (Kita meminjamkan uang ke orang), potong saldo utama
+        $user = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
+        $dompet = $this->db->get_where('dompet', ['id_dompet' => $id_dompet, 'username' => $user['username']])->row_array();
+
+        if (!$dompet) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Dompet tidak ditemukan!</div>');
+            redirect('hutangpiutang');
+            return;
+        }
+
+        // Jika jenisnya Piutang (Kita meminjamkan uang ke orang), potong saldo dompet
         if ($data['jenis'] == 'Piutang') {
-            $user = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
-            if ($user['saldo'] < $data['nominal']) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Saldo utama tidak mencukupi untuk meminjamkan uang sejumlah itu!</div>');
+            if ($dompet['saldo'] < $data['nominal']) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Saldo di Dompet tidak mencukupi untuk meminjamkan uang sejumlah itu!</div>');
                 redirect('hutangpiutang');
+                return;
             }
-            $new_saldo = $user['saldo'] - $data['nominal'];
-            $this->db->set('saldo', $new_saldo);
+            $new_saldo_dompet = $dompet['saldo'] - $data['nominal'];
+            $new_saldo_user = $user['saldo'] - $data['nominal'];
+
+            $this->db->set('saldo', $new_saldo_dompet);
+            $this->db->where('id_dompet', $id_dompet);
+            $this->db->update('dompet');
+
+            $this->db->set('saldo', $new_saldo_user);
             $this->db->where('username', $user['username']);
             $this->db->update('pengguna');
             
@@ -70,18 +92,24 @@ class HutangPiutang extends CI_Controller
                 'nama' => 'Meminjamkan Uang ke: ' . $data['nama_orang'],
                 'tanggal' => date('d-m-Y'),
                 'jam' => date('H:i:s'),
-                'kategoriHarian' => 'Pengeluaran',
-                'kategoriPengeluaranH' => 'Piutang',
+                'tipe' => 'Pengeluaran',
+                'kategori' => 'Piutang',
                 'pemasukan' => 0,
                 'pengeluaran' => $data['nominal'],
-                'sisaSaldo' => $new_saldo
+                'sisaSaldo' => $new_saldo_dompet,
+                'id_dompet' => $id_dompet
             ];
             $this->db->insert('harianhistori', $histori_data);
         } else {
-            // Jika jenisnya Hutang (Kita meminjam uang dari orang), tambah saldo utama
-            $user = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
-            $new_saldo = $user['saldo'] + $data['nominal'];
-            $this->db->set('saldo', $new_saldo);
+            // Jika jenisnya Hutang (Kita meminjam uang dari orang), tambah saldo dompet
+            $new_saldo_dompet = $dompet['saldo'] + $data['nominal'];
+            $new_saldo_user = $user['saldo'] + $data['nominal'];
+
+            $this->db->set('saldo', $new_saldo_dompet);
+            $this->db->where('id_dompet', $id_dompet);
+            $this->db->update('dompet');
+
+            $this->db->set('saldo', $new_saldo_user);
             $this->db->where('username', $user['username']);
             $this->db->update('pengguna');
             
@@ -92,11 +120,12 @@ class HutangPiutang extends CI_Controller
                 'nama' => 'Menerima Pinjaman dari: ' . $data['nama_orang'],
                 'tanggal' => date('d-m-Y'),
                 'jam' => date('H:i:s'),
-                'kategoriHarian' => 'Pemasukan',
-                'kategoriPengeluaranH' => '-',
+                'tipe' => 'Pemasukan',
+                'kategori' => '-',
                 'pemasukan' => $data['nominal'],
                 'pengeluaran' => 0,
-                'sisaSaldo' => $new_saldo
+                'sisaSaldo' => $new_saldo_dompet,
+                'id_dompet' => $id_dompet
             ];
             $this->db->insert('harianhistori', $histori_data);
         }
@@ -110,10 +139,15 @@ class HutangPiutang extends CI_Controller
     {
         $catatan = $this->db->get_where('hutang_piutang', ['id_hp' => $id])->row_array();
         $user = $this->db->get_where('pengguna', ['username' => $this->session->userdata('username')])->row_array();
+        
+        $id_dompet = $catatan['id_dompet'];
+        $dompet = $this->db->get_where('dompet', ['id_dompet' => $id_dompet])->row_array();
 
         if ($catatan['jenis'] == 'Piutang') {
             // Orang bayar hutang ke kita = Saldo bertambah
-            $new_saldo = $user['saldo'] + $catatan['nominal'];
+            $new_saldo_dompet = $dompet['saldo'] + $catatan['nominal'];
+            $new_saldo_user = $user['saldo'] + $catatan['nominal'];
+            
             $nama_history = 'Penerimaan Pembayaran Piutang dari: ' . $catatan['nama_orang'];
             $pemasukan = $catatan['nominal'];
             $pengeluaran = 0;
@@ -121,11 +155,14 @@ class HutangPiutang extends CI_Controller
             $kategori_pengeluaran = '-';
         } else {
             // Kita bayar hutang ke orang = Saldo berkurang
-            if ($user['saldo'] < $catatan['nominal']) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Saldo utama tidak mencukupi untuk melunasi hutang ini!</div>');
+            if ($dompet['saldo'] < $catatan['nominal']) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Saldo Dompet tidak mencukupi untuk melunasi hutang ini!</div>');
                 redirect('hutangpiutang');
+                return;
             }
-            $new_saldo = $user['saldo'] - $catatan['nominal'];
+            $new_saldo_dompet = $dompet['saldo'] - $catatan['nominal'];
+            $new_saldo_user = $user['saldo'] - $catatan['nominal'];
+            
             $nama_history = 'Melunasi Hutang ke: ' . $catatan['nama_orang'];
             $pemasukan = 0;
             $pengeluaran = $catatan['nominal'];
@@ -133,10 +170,15 @@ class HutangPiutang extends CI_Controller
             $kategori_pengeluaran = 'Bayar Hutang';
         }
 
-        // Update Saldo
-        $this->db->set('saldo', $new_saldo);
+        // Update Saldo User
+        $this->db->set('saldo', $new_saldo_user);
         $this->db->where('username', $user['username']);
         $this->db->update('pengguna');
+
+        // Update Saldo Dompet
+        $this->db->set('saldo', $new_saldo_dompet);
+        $this->db->where('id_dompet', $id_dompet);
+        $this->db->update('dompet');
 
         // Update Status Lunas
         $this->db->set('status', 'Lunas');
@@ -150,11 +192,12 @@ class HutangPiutang extends CI_Controller
             'nama' => $nama_history,
             'tanggal' => date('d-m-Y'),
             'jam' => date('H:i:s'),
-            'kategoriHarian' => $kategori_harian,
-            'kategoriPengeluaranH' => $kategori_pengeluaran,
+            'tipe' => $kategori_harian,
+            'kategori' => $kategori_pengeluaran,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
-            'sisaSaldo' => $new_saldo
+            'sisaSaldo' => $new_saldo_dompet,
+            'id_dompet' => $id_dompet
         ];
         $this->db->insert('harianhistori', $histori_data);
 

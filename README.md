@@ -61,7 +61,7 @@ Ikuti langkah-langkah mudah di bawah ini untuk menjalankan **Saqoe** di _environ
 ### 2. Kloning Repositori
 Jalankan perintah ini di terminal pada direktori `htdocs` (XAMPP) atau direktori root *web server* Anda:
 ```bash
-git clone https://github.com/username/impal-saqoe.git
+git clone https://github.com/faisalridwan/saqoe.git
 cd impal-saqoe
 ```
 
@@ -85,7 +85,7 @@ Buka folder proyek ini di _Code Editor_ Anda (VS Code, Sublime, dsb).
 ### 5. Jalankan Aplikasi
 Jika Anda menggunakan web server lokal tanpa *virtual host*, Anda bisa mengakses aplikasi melalui browser:
 ```
-http://localhost/impal-saqoe/
+http://localhost/saqoe/
 ```
 Atau jika Anda ingin menjalankan *built-in server* PHP, jalankan perintah ini di terminal:
 ```bash
@@ -115,7 +115,7 @@ Pastikan Anda membuat *branch* baru sebelum mengajukan pembaruan.
 ---
 
 ## 📄 Lisensi (License)
-Dibuat dengan ❤️ oleh tim pengembang **Saqoe**.
+Dibuat dengan ❤️ oleh **qreatip studio**.
 Kode sumber ini bersifat terbuka (*Open Source*) dan dapat dimodifikasi untuk keperluan pembelajaran.
 
 ---

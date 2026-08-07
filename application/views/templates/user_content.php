@@ -4,7 +4,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,6 +44,14 @@
 <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
+<!-- DataTables Buttons -->
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
 
@@ -114,104 +122,5 @@
 </html>
 
 
-<!-- Modal Nambah Event -->
-<div class="modal fade" id="TambahEvent" tabindex="-1" role="dialog" aria-labelledby="TambahEvent" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?= form_open('user/event'); ?>
-                <div class="modal-header">
-                    <h5 class="modal-title">Masukkan Nama Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label">Nama Event</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="namaEvent" name="namaEvent" placeholder="Nama Event">
-                            <?= form_error('namaEvent', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="budget" class="col-sm-3 col-form-label">Budget Event</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                </div>
-                                <input type="text" class="form-control input-rupiah" id="budget" name="budget" placeholder="Besar Budget">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer center-block">
-                    <div class="center-block">
-                        <button type="submit" class="btn btn-primary center-block">Tambah Event</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
-<!-- Modal Pemasukan Event -->
-<div class="modal fade" id="EventPemasukan" tabindex="-1" role="dialog" aria-labelledby="EventPemasukan" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EventPemasukan">Pemasukan Event mana yang mau dipilih ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <?= form_open('user/eventPemasukan'); ?>
-                    <div class="form-group">
-                        <select class="form-control select2" id="namaEventPemasukan" name="namaEvent" required>
-                            <?php foreach ($event as $c) { ?>
-                                <option value="<?php echo $c->namaEvent; ?>"> <?php echo $c->namaEvent; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-            </div>
-            <div class="modal-footer center-block">
-                <div class="center-block">
-                    <button type="submit" class="btn btn-primary center-block">Pilih Event</button>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Pengeluaran Event -->
-<div class="modal fade" id="EventPengeluaran" tabindex="-1" role="dialog" aria-labelledby="EventPengeluaran" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EventPengeluaran">Pengeluaran Event mana yang mau dipilih ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <?= form_open('user/eventPengeluaran'); ?>
-                    <div class="form-group">
-                        <select class="form-control select2" id="namaEventPengeluaran" name="namaEvent" required>
-                            <?php foreach ($event as $c) { ?>
-                                <option value="<?php echo $c->namaEvent; ?>"> <?php echo $c->namaEvent; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-            </div>
-            <div class="modal-footer center-block">
-                <div class="center-block">
-                    <button type="submit" class="btn btn-primary center-block">Pilih Event</button>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>

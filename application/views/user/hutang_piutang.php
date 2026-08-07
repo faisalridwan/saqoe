@@ -59,9 +59,9 @@
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
-                        <tr>
                             <th>Tgl Pinjam</th>
                             <th>Jenis</th>
+                            <th>Dompet</th>
                             <th>Nama Pihak</th>
                             <th>Nominal</th>
                             <th>Jatuh Tempo</th>
@@ -80,6 +80,7 @@
                                         <span class="badge badge-success">Piutang (Saya Meminjamkan)</span>
                                     <?php endif; ?>
                                 </td>
+                                <td><span class="badge badge-secondary"><?= $c['nama_dompet'] ? $c['nama_dompet'] : 'Utama'; ?></span></td>
                                 <td class="font-weight-bold"><?= $c['nama_orang']; ?></td>
                                 <td>Rp. <?= number_format($c['nominal'], 0, ',', '.'); ?></td>
                                 <td>
@@ -135,7 +136,16 @@
                             <option value="Hutang">HUTANG (Saya meminjam uang dari orang)</option>
                             <option value="Piutang">PIUTANG (Saya meminjamkan uang ke orang)</option>
                         </select>
-                        <small class="form-text text-danger">*Hutang akan menambah saldo utama Anda. Piutang akan memotong saldo utama Anda.</small>
+                        <small class="form-text text-danger">*Hutang akan menambah saldo dompet Anda. Piutang akan memotong saldo dompet Anda.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Dompet</label>
+                        <select name="id_dompet" class="form-control select2" required>
+                            <option value="">-- Pilih Dompet --</option>
+                            <?php foreach ($list_dompet as $d) : ?>
+                                <option value="<?= $d['id_dompet']; ?>"><?= $d['nama_dompet']; ?> (Rp. <?= number_format($d['saldo'], 0, ',', '.'); ?>)</option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Nama Orang / Pihak Lain</label>

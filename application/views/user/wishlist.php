@@ -100,9 +100,18 @@
                                 <div class="modal-body">
                                     <p class="text-muted">Sisa yang dibutuhkan: <b>Rp. <?= number_format($w['harga_target'] - $w['saldo_terkumpul'], 0, ',', '.'); ?></b></p>
                                     <div class="form-group">
+                                        <label>Pilih Dompet Sumber Dana</label>
+                                        <select name="id_dompet" class="form-control select2" required style="width: 100%;">
+                                            <option value="">-- Pilih Dompet --</option>
+                                            <?php foreach ($list_dompet as $d) : ?>
+                                                <option value="<?= $d['id_dompet']; ?>"><?= $d['nama_dompet']; ?> (Rp. <?= number_format($d['saldo'], 0, ',', '.'); ?>)</option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Nominal Nabung (Rp)</label>
                                         <input type="text" name="nominal" class="form-control input-rupiah" required>
-                                        <small class="form-text text-muted">Saldo Utama Anda saat ini: Rp. <?= number_format($user['saldo'], 0, ',', '.'); ?></small>
+                                        <small class="form-text text-muted">Total Saldo Utama Anda (Gabungan) saat ini: Rp. <?= number_format($user['saldo'], 0, ',', '.'); ?></small>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

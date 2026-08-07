@@ -12,6 +12,7 @@ class M_User extends CI_Model
             'name' => $this->input->post('name', true),
             'phoneNumber' => $this->input->post('phoneNumber', true),
             'address' => $this->input->post('address', true),
+            'limit_bulanan' => preg_replace('/[^0-9]/', '', $this->input->post('limit_bulanan'))
         ];
         
         if ($new_image) {
