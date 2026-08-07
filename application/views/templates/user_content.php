@@ -72,12 +72,12 @@
         allowInput: true
     });
 
-    // Format angka dengan titik sebagai pemisah ribuan dan prefix Rp.
+    // Format angka dengan titik sebagai pemisah ribuan
     $(document).on('input', '.input-rupiah', function(e) {
         let value = this.value.replace(/[^0-9]/g, '');
         if (value !== '') {
             value = parseInt(value, 10).toString();
-            this.value = 'Rp. ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            this.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         } else {
             this.value = '';
         }

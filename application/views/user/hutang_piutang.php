@@ -143,7 +143,12 @@
                     </div>
                     <div class="form-group">
                         <label>Nominal (Rp)</label>
-                        <input type="text" name="nominal" class="form-control input-rupiah" placeholder="Contoh: 50.000" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                            </div>
+                            <input type="text" name="nominal" class="form-control input-rupiah" placeholder="Contoh: 50.000" required>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">

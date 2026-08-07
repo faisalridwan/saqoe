@@ -138,7 +138,12 @@
                     </div>
                     <div class="form-group">
                         <label>Harga Target (Rp)</label>
-                        <input type="text" name="harga_target" class="form-control input-rupiah" placeholder="Contoh: 15.000.000" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                            </div>
+                            <input type="text" name="harga_target" class="form-control input-rupiah" placeholder="Contoh: 15.000.000" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Tenggat Waktu / Deadline (Opsional)</label>
