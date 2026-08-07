@@ -21,6 +21,7 @@ class Kategori extends CI_Controller
 
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/kategori', $data);
+        $this->load->view('templates/user_footer');
         $this->load->view('templates/user_content', $data);
     }
 

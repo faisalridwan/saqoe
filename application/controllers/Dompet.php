@@ -21,6 +21,7 @@ class Dompet extends CI_Controller
 
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/dompet', $data);
+        $this->load->view('templates/user_footer');
         $this->load->view('templates/user_content', $data);
     }
 

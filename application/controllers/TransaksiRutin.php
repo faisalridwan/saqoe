@@ -56,7 +56,7 @@ class TransaksiRutin extends CI_Controller
                 'judul' => $this->input->post('judul', true),
                 'nominal' => preg_replace('/[^0-9]/', '', $this->input->post('nominal', true)),
                 'jenis' => $jenis,
-                'kategori' => $kategori,
+                'kategoriHarian' => $kategori,
                 'id_dompet' => $this->input->post('id_dompet', true),
                 'tanggal_eksekusi' => $this->input->post('tanggal_eksekusi', true),
                 'status_aktif' => 1
@@ -70,7 +70,7 @@ class TransaksiRutin extends CI_Controller
 
     public function hapus($id)
     {
-        $this->db->where('id_tr', $id);
+        $this->db->where('id_rutin', $id);
         $this->db->where('username', $this->session->userdata('username'));
         $this->db->delete('transaksi_rutin');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Transaksi Rutin berhasil dihapus!</div>');
@@ -79,10 +79,10 @@ class TransaksiRutin extends CI_Controller
 
     public function toggle($id)
     {
-        $tr = $this->db->get_where('transaksi_rutin', ['id_tr' => $id, 'username' => $this->session->userdata('username')])->row_array();
+        $tr = $this->db->get_where('transaksi_rutin', ['id_rutin' => $id, 'username' => $this->session->userdata('username')])->row_array();
         if ($tr) {
             $new_status = $tr['status_aktif'] == 1 ? 0 : 1;
-            $this->db->where('id_tr', $id);
+            $this->db->where('id_rutin', $id);
             $this->db->update('transaksi_rutin', ['status_aktif' => $new_status]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Status Transaksi Rutin berhasil diubah!</div>');
         }
