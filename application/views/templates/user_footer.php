@@ -1,8 +1,11 @@
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white mt-auto">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Saqoe 2019</span>
+            <span>Copyright &copy; Saqoe 2026</span>
         </div>
     </div>
 </footer>
@@ -66,24 +69,37 @@
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/'); ?>js/demo/chart-area-demo.js"></script>
 <script src="<?= base_url('assets/'); ?>js/demo/chart-pie-demo.js"></script>
+
+<!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
+    // Init Select2
     $(document).ready(function() {
         $('.select2').select2({
             theme: 'bootstrap4',
             width: '100%'
         });
+    });
 
-        // Format angka dengan titik sebagai pemisah ribuan
-        $(document).on('input', '.input-rupiah', function(e) {
-            let value = this.value.replace(/[^0-9]/g, '');
-            if (value !== '') {
-                value = parseInt(value, 10).toString();
-                this.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            } else {
-                this.value = '';
-            }
-        });
+    // Init Flatpickr
+    flatpickr(".datepicker", {
+        dateFormat: "Y-m-d",
+        allowInput: true
+    });
+
+    // Format angka dengan titik sebagai pemisah ribuan dan prefix Rp.
+    $(document).on('input', '.input-rupiah', function(e) {
+        let value = this.value.replace(/[^0-9]/g, '');
+        if (value !== '') {
+            value = parseInt(value, 10).toString();
+            this.value = 'Rp. ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        } else {
+            this.value = '';
+        }
     });
 </script>
 

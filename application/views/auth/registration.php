@@ -7,7 +7,9 @@
                     <div class="col-lg">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <img src="<?= base_url('assets/img/logotok.png'); ?>" alt="Saqoe Logo" width="80" class="mb-3">
+                                <h1 class="h4 text-gray-900 mb-2">Buat Akun Saqoe</h1>
+                                <p class="text-muted mb-4">Daftarkan diri Anda untuk merasakan kemudahan manajemen finansial.</p>
                             </div>
                             <?= form_open('auth/registration', ['class' => 'user']); ?>
                                 <div class="form-group">

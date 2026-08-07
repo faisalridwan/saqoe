@@ -12,7 +12,9 @@
               <div class="col-lg">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login Page</h1>
+                    <img src="<?= base_url('assets/img/logotok.png'); ?>" alt="Saqoe Logo" width="100" class="mb-4">
+                    <h1 class="h4 text-gray-900 mb-2">Selamat Datang di Saqoe</h1>
+                    <p class="text-muted mb-4">Silakan login untuk mulai mengelola keuangan harian dan event Anda dengan mudah.</p>
                   </div>
 
                   <?= $this->session->flashdata('message'); ?>
