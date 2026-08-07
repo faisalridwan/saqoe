@@ -96,7 +96,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="<?= base_url('wishlist/nabung/') . $w['id_wishlist']; ?>" method="post">
+                            <?= form_open('wishlist/nabung/' . $w['id_wishlist']); ?>
                                 <div class="modal-body">
                                     <p class="text-muted">Sisa yang dibutuhkan: <b>Rp. <?= number_format($w['harga_target'] - $w['saldo_terkumpul'], 0, ',', '.'); ?></b></p>
                                     <div class="form-group">
@@ -130,7 +130,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('wishlist/tambah'); ?>" method="post">
+            <?= form_open('wishlist/tambah'); ?>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nama Impian/Target</label>

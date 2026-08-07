@@ -177,7 +177,7 @@ DROP TABLE IF EXISTS `harianhistori`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `harianhistori` (
   `username` varchar(50) DEFAULT NULL,
-  `nama` varchar(25) DEFAULT NULL,
+  `nama` varchar(100) DEFAULT NULL,
   `tanggal` varchar(15) DEFAULT NULL,
   `jam` varchar(15) DEFAULT NULL,
   `kategoriHarian` varchar(25) DEFAULT NULL,

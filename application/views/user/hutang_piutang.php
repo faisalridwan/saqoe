@@ -127,7 +127,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('hutangpiutang/tambah'); ?>" method="post">
+            <?= form_open('hutangpiutang/tambah'); ?>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Jenis Catatan</label>
