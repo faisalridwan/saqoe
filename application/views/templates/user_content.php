@@ -57,12 +57,37 @@
 <!-- Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     // Init Select2
     $(document).ready(function() {
         $('.select2').select2({
             theme: 'bootstrap4',
             width: '100%'
+        });
+
+        // Global SweetAlert2 Confirm
+        $('.btn-confirm').on('click', function(e) {
+            e.preventDefault();
+            const url = $(this).attr('href');
+            const message = $(this).data('message');
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4e73df', // Primary color SB Admin 2
+                cancelButtonColor: '#e74a3b', // Danger color SB Admin 2
+                confirmButtonText: 'Ya, Lanjutkan!',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
         });
     });
 

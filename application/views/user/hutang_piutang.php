@@ -98,11 +98,11 @@
                                 </td>
                                 <td>
                                     <?php if ($c['status'] == 'Belum Lunas') : ?>
-                                        <a href="<?= base_url('hutangpiutang/lunas/') . $c['id_hp']; ?>" class="btn btn-sm btn-success" onclick="return confirm('Tandai sebagai lunas? Saldo Anda akan otomatis disesuaikan dan tercatat di History.');">
+                                        <a href="<?= base_url('hutangpiutang/lunas/') . $c['id_hp']; ?>" class="btn btn-sm btn-success btn-confirm" data-message="Tandai sebagai lunas? Saldo Anda akan otomatis disesuaikan dan tercatat di History.">
                                             <i class="fas fa-check"></i> Lunas
                                         </a>
                                     <?php endif; ?>
-                                    <a href="<?= base_url('hutangpiutang/hapus/') . $c['id_hp']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus catatan ini? Ini tidak akan mengembalikan/memotong saldo utama.');">
+                                    <a href="<?= base_url('hutangpiutang/hapus/') . $c['id_hp']; ?>" class="btn btn-sm btn-danger btn-confirm" data-message="Hapus catatan ini? Ini tidak akan mengembalikan/memotong saldo utama.">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

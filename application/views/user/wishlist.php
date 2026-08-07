@@ -78,7 +78,7 @@
                                 <?php else : ?>
                                     <span class="badge badge-success px-3 py-2"><i class="fas fa-check-circle"></i> Tercapai!</span>
                                 <?php endif; ?>
-                                <a href="<?= base_url('wishlist/hapus/') . $w['id_wishlist']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin ingin menghapus target ini? Jika ada saldo terkumpul, akan dikembalikan ke Saldo Utama.');">
+                                <a href="<?= base_url('wishlist/hapus/') . $w['id_wishlist']; ?>" class="btn btn-sm btn-outline-danger btn-confirm" data-message="Yakin ingin menghapus target ini? Jika ada saldo terkumpul, akan dikembalikan ke Saldo Utama.">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
