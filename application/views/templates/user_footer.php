@@ -57,10 +57,35 @@
 
 <!-- Page level plugins -->
 <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
+<script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/'); ?>js/demo/chart-area-demo.js"></script>
 <script src="<?= base_url('assets/'); ?>js/demo/chart-pie-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: 'bootstrap4',
+            width: '100%'
+        });
+
+        // Format angka dengan titik sebagai pemisah ribuan
+        $(document).on('input', '.input-rupiah', function(e) {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value !== '') {
+                value = parseInt(value, 10).toString();
+                this.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else {
+                this.value = '';
+            }
+        });
+    });
+</script>
 
 </body>
 
@@ -79,18 +104,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <div class="form-group row">
-                        <label for="username" class="col-sm-3 col-form-label">Username</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Nama Event</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="namaEvent" name="namaEvent" placeholder="Nama Event">
-                            <?= form_error('namaPemasukan', '<small class="text-danger pl-3">', '</small>'); ?>
+                            <?= form_error('namaEvent', '<small class="text-danger pl-3">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="budget" class="col-sm-3 col-form-label">Budget Event</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                </div>
+                                <input type="text" class="form-control input-rupiah" id="budget" name="budget" placeholder="Besar Budget">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,14 +146,8 @@
             </div>
             <div class="modal-body">
                 <?= form_open('user/eventPemasukan'); ?>
-                    <div class="form-group row">
-                        <label for="username" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <select class="form-control" id="namaEvent" name="namaEvent" required>
+                        <select class="form-control select2" id="namaEventPemasukan" name="namaEvent" required>
                             <?php foreach ($event as $c) { ?>
                                 <option value="<?php echo $c->namaEvent; ?>"> <?php echo $c->namaEvent; ?></option>
                             <?php } ?>
@@ -153,14 +176,8 @@
             </div>
             <div class="modal-body">
                 <?= form_open('user/eventPengeluaran'); ?>
-                    <div class="form-group row">
-                        <label for="username" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <select class="form-control" id="namaEvent" name="namaEvent" required>
+                        <select class="form-control select2" id="namaEventPengeluaran" name="namaEvent" required>
                             <?php foreach ($event as $c) { ?>
                                 <option value="<?php echo $c->namaEvent; ?>"> <?php echo $c->namaEvent; ?></option>
                             <?php } ?>

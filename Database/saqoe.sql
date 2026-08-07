@@ -39,12 +39,9 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`username`, `namaEvent`, `budget`) VALUES
-('test', '1', 0),
-('tubes', 'jalan', 111),
-('qw', '12', 0),
-('qw', 'qwe', 0),
-('qw', 'qweqwe', 0),
-('faisalridwan', 'qw', 0);
+('faisalridwan', 'Liburan Bali', 5000000),
+('faisalridwan', 'Beli Laptop', 15000000),
+('faisalridwansiregar', 'Renovasi Rumah', 20000000);
 
 -- --------------------------------------------------------
 
@@ -70,9 +67,9 @@ CREATE TABLE `eventhistori` (
 --
 
 INSERT INTO `eventhistori` (`username`, `kategoriEvent`, `namaEvent`, `namaPemaPengEvent`, `kategoriPengeluaranE`, `tanggal`, `jam`, `pemasukanEvent`, `pengeluaranEvent`, `sisaBudget`) VALUES
-('tubes ', 'Pemasukan', 'null', 'qwq', '-', '21-08-2018', '10:13:56', 123, 0, 123),
-('tubes ', 'Pemasukan', 'jalan', 'qwe', '-', '21-08-2018', '10:17:19', 123, 0, 123),
-('tubes ', 'Pengeluaran', 'jalan', 'qweq', 'Makanan & Minuman', '07-12-2018', '10:17:24', 0, 12, 111);
+('faisalridwan', 'Pemasukan', 'Liburan Bali', 'Tabungan Gaji', '-', '01-08-2026', '09:00:00', 1000000, 0, 1000000),
+('faisalridwan', 'Pemasukan', 'Liburan Bali', 'Bonus Kantor', '-', '02-08-2026', '10:00:00', 500000, 0, 1500000),
+('faisalridwan', 'Pengeluaran', 'Liburan Bali', 'Tiket Pesawat', 'Transportasi', '03-08-2026', '11:00:00', 0, 800000, 700000);
 
 -- --------------------------------------------------------
 
@@ -94,8 +91,8 @@ CREATE TABLE `eventpemasukan` (
 --
 
 INSERT INTO `eventpemasukan` (`username`, `namaEvent`, `namaPemasukanEvent`, `budget`, `tanggalPemasukan`, `jamPemasukan`) VALUES
-('tubes', 'null ', 'qwq ', 123, '21-08-2018', '10:13:56'),
-('tubes', 'jalan ', 'qwe ', 123, '21-08-2018', '10:17:19');
+('faisalridwan', 'Liburan Bali', 'Tabungan Gaji', 1000000, '01-08-2026', '09:00:00'),
+('faisalridwan', 'Liburan Bali', 'Bonus Kantor', 500000, '02-08-2026', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -118,7 +115,7 @@ CREATE TABLE `eventpengeluaran` (
 --
 
 INSERT INTO `eventpengeluaran` (`username`, `namaEvent`, `namaPengeluaranEvent`, `besarPengeluaran`, `kategoriPengeluaranEvent`, `tglPengeluaranEvent`, `jamPengeluaran`) VALUES
-('tubes', 'jalan', 'qweq', 12, 'Makanan & Minuman', '07-12-2018', '10:17:24');
+('faisalridwan', 'Liburan Bali', 'Tiket Pesawat', 800000, 'Transportasi', '03-08-2026', '11:00:00');
 
 -- --------------------------------------------------------
 
@@ -143,14 +140,12 @@ CREATE TABLE `harianhistori` (
 --
 
 INSERT INTO `harianhistori` (`username`, `nama`, `tanggal`, `jam`, `kategoriHarian`, `kategoriPengeluaranH`, `pemasukan`, `pengeluaran`, `sisaSaldo`) VALUES
-('tubes ', 'uang jajan', '07-12-2018', '10:10:56', 'Pemasukan', '-', 2000000, 0, 2000000),
-('tubes ', 'beli nasi uduk', '07-12-2018', '10:11:09', 'Pengeluaran', 'Makanan & Minuman', 0, 10000, 1990000),
-('tubes ', 'dikasih orang', '07-12-2018', '10:11:24', 'Pemasukan', '-', 10000, 0, 2000000),
-('tubes ', 'beli sepeda', '07-12-2018', '10:11:35', 'Pengeluaran', 'Hiburan', 0, 200000, 1800000),
-('qw ', 'qwe', '07-12-2018', '10:23:19', 'Pemasukan', '-', 12, 0, 12),
-('qw ', 'qw', '07-12-2018', '10:23:24', 'Pengeluaran', 'Makanan & Minuman', 0, 12, 0),
-('qw ', 'qw', '07-12-2018', '10:23:49', 'Pemasukan', '-', 12, 0, 12),
-('qw ', '21', '07-12-2018', '10:23:54', 'Pengeluaran', 'Makanan & Minuman', 0, 1, 11);
+('faisalridwan', 'Gaji Bulanan', '01-08-2026', '08:00:00', 'Pemasukan', '-', 5000000, 0, 5000000),
+('faisalridwan', 'Beli Makan Siang', '02-08-2026', '12:30:00', 'Pengeluaran', 'Makanan & Minuman', 0, 50000, 4950000),
+('faisalridwan', 'Beli Kopi', '03-08-2026', '15:00:00', 'Pengeluaran', 'Makanan & Minuman', 0, 25000, 4925000),
+('faisalridwan', 'Nonton Bioskop', '04-08-2026', '19:00:00', 'Pengeluaran', 'Hiburan', 0, 100000, 4825000),
+('faisalridwansiregar', 'Uang Jajan', '01-08-2026', '07:00:00', 'Pemasukan', '-', 1000000, 0, 1000000),
+('faisalridwansiregar', 'Beli Pulsa', '02-08-2026', '08:00:00', 'Pengeluaran', 'Tagihan', 0, 100000, 900000);
 
 -- --------------------------------------------------------
 
@@ -171,10 +166,8 @@ CREATE TABLE `harianpemasukan` (
 --
 
 INSERT INTO `harianpemasukan` (`username`, `namaPemasukan`, `besarPemasukan`, `tanggalPemasukan`, `jamPemasukan`) VALUES
-('tubes', 'uang jajan ', 2000000, '07-12-2018', '10:10:56'),
-('tubes', 'dikasih orang ', 10000, '07-12-2018', '10:11:24'),
-('qw', 'qwe ', 12, '07-12-2018', '10:23:19'),
-('qw', 'qw ', 12, '07-12-2018', '10:23:49');
+('faisalridwan', 'Gaji Bulanan', 5000000, '01-08-2026', '08:00:00'),
+('faisalridwansiregar', 'Uang Jajan', 1000000, '01-08-2026', '07:00:00');
 
 -- --------------------------------------------------------
 
@@ -196,10 +189,10 @@ CREATE TABLE `harianpengeluaran` (
 --
 
 INSERT INTO `harianpengeluaran` (`username`, `namaPengeluaran`, `besarPengeluaran`, `tanggalPengeluaran`, `jamPengeluaran`, `kategoriPengeluaranH`) VALUES
-('tubes', 'beli nasi uduk', 1990000, '07-12-2018', '10:11:09', 'Makanan & Minuman'),
-('tubes', 'beli sepeda', 1800000, '07-12-2018', '10:11:35', 'Hiburan'),
-('qw', 'qw', 0, '07-12-2018', '10:23:24', 'Makanan & Minuman'),
-('qw', '21', 11, '07-12-2018', '10:23:54', 'Makanan & Minuman');
+('faisalridwan', 'Beli Makan Siang', 50000, '02-08-2026', '12:30:00', 'Makanan & Minuman'),
+('faisalridwan', 'Beli Kopi', 25000, '03-08-2026', '15:00:00', 'Makanan & Minuman'),
+('faisalridwan', 'Nonton Bioskop', 100000, '04-08-2026', '19:00:00', 'Hiburan'),
+('faisalridwansiregar', 'Beli Pulsa', 100000, '02-08-2026', '08:00:00', 'Tagihan');
 
 -- --------------------------------------------------------
 
@@ -224,13 +217,8 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`username`, `password`, `name`, `phoneNumber`, `address`, `saldo`, `email`, `image`, `datecreated`) VALUES
-('', '', 'Faisal Ridwan', '', '', NULL, '', '', ''),
-('faisalridwan', '1234', 'Faisal Ridwan Siregar', '082275007855', 'Jl. Bukit Kotapinang', 800001, '', '', ''),
-('faisalridwansiregar', '12345', 'Faisal Ridwan', '12121221', 'assal', 100000, 'faisalridwann@gmail.com', 'surf-chill_39168-13.jpg', '1572742356'),
-('faisalridwansiregarr', '12345', 'Faisal Ridwan Siregar', '12121221', 'assa', 100000, 'faisalridwansiregar@gmail.com', 'default.jpg', '1572867014'),
-('qw', 'qw', 'qw', 'ew', 'qwe', 11, '', '', ''),
-('test', '123', 'test', '08123456789', 'jl.test', 1000000, '', '', ''),
-('tubes', '12', 'tugas kecil', '082275007855', 'jl. tubes', 1800000, '', '', '');
+('faisalridwan', '$2y$12$sNtNtmkfVeaSI4Z3dw0HO.JKl5FrbxGgCtBVDvV4RaSq6cT4PvBE2', 'Faisal Ridwan Siregar', '082275007855', 'Jl. Bukit Kotapinang', 800001, 'faisalridwan@gmail.com', 'default.jpg', '1572742356'),
+('faisalridwansiregar', '$2y$12$/TqG1l8pDMBURuiooDg8tekQxarlykeeIUJINItOb0be5d2GeUm7y', 'Faisal Ridwan', '08123456789', 'Jl. Assal', 100000, 'faisalridwann@gmail.com', 'default.jpg', '1572867014');
 
 --
 -- Indexes for dumped tables

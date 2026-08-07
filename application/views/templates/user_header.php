@@ -17,6 +17,11 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.5.2/dist/select2-bootstrap4.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this page -->
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <link rel="icon" href="<?=base_url()?>/logotok.png" type="image/png">
 
@@ -95,8 +100,8 @@
                 <div id="history" class="collapse" aria-labelledby="headingUtilities">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="#">Harian</a>
-                        <a class="collapse-item" href="#">Event</a>
+                        <a class="collapse-item" href="<?= base_url('user/historyHarian'); ?>">Harian</a>
+                        <a class="collapse-item" href="<?= base_url('user/historyEvent'); ?>">Event</a>
                         <!-- <a class="collapse-item" href="utilities-animation.html">Animations</a>
             <a class="collapse-item" href="utilities-other.html">Other</a> -->
                     </div>
@@ -147,33 +152,54 @@
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item no-arrow mx-1">
                             <a class="nav-link font-weight-bold text-black-50" href="#" id="saldo">
-                                Saldo : Rp.<?= $user['saldo']; ?>,00
+                                Saldo : Rp. <?= number_format($user['saldo'], 0, ',', '.'); ?>
                             </a>
                         </li>
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
+                            <?php 
+                                $ci =& get_instance();
+                                $un = $ci->session->userdata('username');
+                                // Get latest 3 activities
+                                $ci->db->order_by('tanggal', 'DESC');
+                                $ci->db->order_by('jam', 'DESC');
+                                $notifs = $ci->db->get_where('harianhistori', ['username' => $un], 3)->result_array();
+                                $count_notif = count($notifs);
+                            ?>
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <?php if($count_notif > 0): ?>
+                                <span class="badge badge-danger badge-counter"><?= $count_notif; ?></span>
+                                <?php endif; ?>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                <?php if($count_notif > 0): ?>
+                                    <?php foreach($notifs as $n): ?>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle <?= $n['kategoriHarian'] == 'Pemasukan' ? 'bg-success' : 'bg-warning'; ?>">
+                                                <i class="fas <?= $n['kategoriHarian'] == 'Pemasukan' ? 'fa-donate' : 'fa-shopping-cart'; ?> text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
+                                        <div>
+                                            <div class="small text-gray-500"><?= $n['tanggal']; ?> <?= $n['jam']; ?></div>
+                                            <span class="font-weight-bold">
+                                                <?= $n['kategoriHarian']; ?>: <?= $n['nama']; ?>
+                                                (Rp. <?= number_format($n['kategoriHarian'] == 'Pemasukan' ? $n['pemasukan'] : $n['pengeluaran'], 0, ',', '.'); ?>)
+                                            </span>
+                                        </div>
+                                    </a>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Belum ada notifikasi</a>
+                                <?php endif; ?>
+                                <a class="dropdown-item text-center small text-gray-500" href="<?= base_url('user/historyHarian'); ?>">Show All Alerts</a>
                             </div>
                         </li>
 

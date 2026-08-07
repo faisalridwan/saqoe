@@ -8,17 +8,17 @@
         <div class="row">
             <div class="col-lg-8">
 
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username" name="username" value="<?= $user['username']; ?>" readonly>
-                    </div>
-                </div>
+
 
                 <div class="form-group row">
                     <label for="username" class="col-sm-2 col-form-label">Saldo Sekarang</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="saldo" name="saldo" value="<?= $user['saldo']; ?>" readonly>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                            </div>
+                            <input type="text" class="form-control" id="saldo" name="saldo" value="<?= number_format($user['saldo'], 0, ',', '.'); ?>" readonly>
+                        </div>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Rp.</span>
                             </div>
-                            <input type="text" class="form-control" id="besarPengeluaran" name="besarPengeluaran" placeholder="Besar Total Pengeluaran">
+                            <input type="text" class="form-control input-rupiah" id="besarPengeluaran" name="besarPengeluaran" placeholder="Besar Pengeluaran">
                         </div>
                     </div>
                 </div>

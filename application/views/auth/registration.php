@@ -31,18 +31,39 @@
                                     <?= form_error('address', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Password">
+                                    <div class="col-sm-6 mb-3 mb-sm-0 position-relative">
+                                        <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Password" style="padding-right: 40px;">
+                                        <span class="toggle-password" data-target="#password1" style="position: absolute; right: 20px; top: 12px; cursor: pointer; padding: 5px; z-index: 10;">
+                                            <i class="fas fa-eye text-gray-500"></i>
+                                        </span>
                                         <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat Password">
+                                    <div class="col-sm-6 position-relative">
+                                        <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat Password" style="padding-right: 40px;">
+                                        <span class="toggle-password" data-target="#password2" style="position: absolute; right: 20px; top: 12px; cursor: pointer; padding: 5px; z-index: 10;">
+                                            <i class="fas fa-eye text-gray-500"></i>
+                                        </span>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Register Account
                                 </button>
                             </form>
+
+                            <script>
+                                document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+                                    toggle.addEventListener('click', function() {
+                                        const targetId = this.getAttribute('data-target');
+                                        const passwordInput = document.querySelector(targetId);
+                                        const icon = this.querySelector('i');
+                                        
+                                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                                        passwordInput.setAttribute('type', type);
+                                        icon.classList.toggle('fa-eye-slash');
+                                        icon.classList.toggle('fa-eye');
+                                    });
+                                });
+                            </script>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
