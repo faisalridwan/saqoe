@@ -8,7 +8,7 @@ class M_auth extends CI_Model
     {
         $data = [
             'username' => htmlspecialchars($this->input->post('username', true)),
-            'password' => $this->input->post('password1'),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
             'name' => htmlspecialchars($this->input->post('name', true)),
             'phoneNumber' => htmlspecialchars($this->input->post('phoneNumber', true)),
             'address' => htmlspecialchars($this->input->post('address', true)),

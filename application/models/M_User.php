@@ -4,17 +4,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_User extends CI_Model
 {
 
-    public function EditPengguna($new_image)
+    public function EditPengguna($new_image = null)
     {
 
-        $username = $this->input->post('email', true);
+        $username = $this->session->userdata('username');
         $data = [
             'name' => $this->input->post('name', true),
             'phoneNumber' => $this->input->post('phoneNumber', true),
             'address' => $this->input->post('address', true),
-            'image' => $new_image,
         ];
-        $this->db->where('email', $username);
+        
+        if ($new_image) {
+            $data['image'] = $new_image;
+        }
+
+        $this->db->where('username', $username);
         $this->db->update('pengguna', $data);
     }
 

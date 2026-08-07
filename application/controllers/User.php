@@ -58,6 +58,7 @@ class User extends CI_Controller
             $this->load->view('user/edit', $data, ['event' => $event]);
             $this->load->view('templates/user_footer');
         } else {
+            $new_image = null;
             $upload_image = $_FILES['image']['name'];
             if ($upload_image) {
                 $config['allowed_types'] = 'gif|jpg|png';
@@ -66,14 +67,15 @@ class User extends CI_Controller
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('image')) {
                     $new_image = $this->upload->data('file_name');
-                    $this->db->set('image', $new_image);
                 } else {
-                    echo $this->upload->display_errors();
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                    redirect('user/edit');
+                    return;
                 }
             }
             $this->M_User->EditPengguna($new_image);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			You profile has been updated ! </div>');
+			Your profile has been updated ! </div>');
             redirect('user/edit');
         }
     }
@@ -103,7 +105,7 @@ class User extends CI_Controller
 
             $data = [
 
-                'username' => $this->input->post('username', true),
+                'username' => $this->session->userdata('username'),
                 'namaPemasukan' => $this->input->post('namaPemasukan', true),
                 'besarPemasukan' => $this->input->post('besarPemasukan', true),
                 'tanggalPemasukan' => date('Y-m-d '),
@@ -153,7 +155,7 @@ class User extends CI_Controller
 
             $data = [
 
-                'username' => $this->input->post('username', true),
+                'username' => $this->session->userdata('username'),
                 'namaPengeluaran' => $this->input->post('namaPengeluaran', true),
                 'besarPengeluaran' => $this->input->post('besarPengeluaran', true),
                 'tanggalPengeluaran' => date('Y-m-d '),
@@ -196,7 +198,7 @@ class User extends CI_Controller
 
         $data = [
 
-            'username' => $this->input->post('username', true),
+            'username' => $this->session->userdata('username'),
             'namaEvent' => $this->input->post('namaEvent', true),
             'budget' => 0,
         ];
@@ -243,7 +245,7 @@ class User extends CI_Controller
 
             $data = [
 
-                'username' => $this->input->post('username', true),
+                'username' => $this->session->userdata('username'),
                 'namaEvent' => $namaEvent,
                 'namaPemasukanEvent' => $this->input->post('namaPemasukan', true),
                 'budget' => $this->input->post('budget', true),
@@ -326,7 +328,7 @@ class User extends CI_Controller
 
             $data = [
 
-                'username' => $this->input->post('username', true),
+                'username' => $this->session->userdata('username'),
                 'namaEvent' => $namaEvent,
                 'namaPengeluaranEvent' => $this->input->post('namaPengeluaran', true),
                 'besarPengeluaran' => $this->input->post('budget', true),

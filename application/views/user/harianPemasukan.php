@@ -3,7 +3,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
     <?= $this->session->flashdata('message'); ?>
 
-    <form action="<?= base_url('user/harianPemasukan'); ?>" method="post">
+    <?= form_open('user/harianPemasukan'); ?>
 
         <div class="row">
             <div class="col-lg-8">

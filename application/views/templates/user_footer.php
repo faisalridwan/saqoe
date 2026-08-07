@@ -71,7 +71,7 @@
 <div class="modal fade" id="TambahEvent" tabindex="-1" role="dialog" aria-labelledby="TambahEvent" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="post" action="<?= base_url('user/event') ?>">
+            <?= form_open('user/event'); ?>
                 <div class="modal-header">
                     <h5 class="modal-title">Masukkan Nama Event</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -116,7 +116,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?= base_url('user/eventPemasukan'); ?>">
+                <?= form_open('user/eventPemasukan'); ?>
                     <div class="form-group row">
                         <label for="username" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
@@ -152,7 +152,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?= base_url('user/eventPengeluaran'); ?>">
+                <?= form_open('user/eventPengeluaran'); ?>
                     <div class="form-group row">
                         <label for="username" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
