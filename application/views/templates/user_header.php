@@ -98,6 +98,20 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('wishlist'); ?>">
+                    <i class="fas fa-fw fa-bullseye"></i>
+                    <span>Target Menabung</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('hutangpiutang'); ?>">
+                    <i class="fas fa-fw fa-handshake"></i>
+                    <span>Hutang Piutang</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#history">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>History</span>
