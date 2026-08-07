@@ -208,14 +208,14 @@ INSERT INTO `harianpengeluaran` (`username`, `namaPengeluaran`, `besarPengeluara
 --
 
 CREATE TABLE `pengguna` (
-  `username` varchar(25) NOT NULL,
-  `password` varchar(15) NOT NULL,
-  `name` varchar(25) NOT NULL,
-  `phoneNumber` varchar(12) NOT NULL,
-  `address` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `phoneNumber` varchar(20) NOT NULL,
+  `address` text NOT NULL,
   `saldo` int(11) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `datecreated` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
