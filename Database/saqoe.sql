@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `event` (
-  `username` varchar(25) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `namaEvent` varchar(25) DEFAULT NULL,
   `budget` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -53,7 +53,7 @@ INSERT INTO `event` (`username`, `namaEvent`, `budget`) VALUES
 --
 
 CREATE TABLE `eventhistori` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `kategoriEvent` varchar(25) NOT NULL,
   `namaEvent` varchar(25) NOT NULL,
   `namaPemaPengEvent` varchar(25) NOT NULL,
@@ -81,7 +81,7 @@ INSERT INTO `eventhistori` (`username`, `kategoriEvent`, `namaEvent`, `namaPemaP
 --
 
 CREATE TABLE `eventpemasukan` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `namaEvent` varchar(25) DEFAULT NULL,
   `namaPemasukanEvent` varchar(25) DEFAULT NULL,
   `budget` int(11) DEFAULT NULL,
@@ -104,7 +104,7 @@ INSERT INTO `eventpemasukan` (`username`, `namaEvent`, `namaPemasukanEvent`, `bu
 --
 
 CREATE TABLE `eventpengeluaran` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `namaEvent` varchar(25) NOT NULL,
   `namaPengeluaranEvent` varchar(25) DEFAULT NULL,
   `besarPengeluaran` int(11) NOT NULL,
@@ -127,7 +127,7 @@ INSERT INTO `eventpengeluaran` (`username`, `namaEvent`, `namaPengeluaranEvent`,
 --
 
 CREATE TABLE `harianhistori` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `nama` varchar(25) DEFAULT NULL,
   `tanggal` varchar(15) DEFAULT NULL,
   `jam` varchar(15) DEFAULT NULL,
@@ -159,7 +159,7 @@ INSERT INTO `harianhistori` (`username`, `nama`, `tanggal`, `jam`, `kategoriHari
 --
 
 CREATE TABLE `harianpemasukan` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `namaPemasukan` varchar(25) DEFAULT NULL,
   `besarPemasukan` int(11) DEFAULT NULL,
   `tanggalPemasukan` varchar(15) DEFAULT NULL,
@@ -183,7 +183,7 @@ INSERT INTO `harianpemasukan` (`username`, `namaPemasukan`, `besarPemasukan`, `t
 --
 
 CREATE TABLE `harianpengeluaran` (
-  `username` varchar(25) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `namaPengeluaran` varchar(25) DEFAULT NULL,
   `besarPengeluaran` int(11) DEFAULT NULL,
   `tanggalPengeluaran` varchar(15) DEFAULT NULL,
