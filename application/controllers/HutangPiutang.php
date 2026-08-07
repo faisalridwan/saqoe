@@ -36,6 +36,7 @@ class HutangPiutang extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/hutang_piutang', $data);
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 
     public function tambah()

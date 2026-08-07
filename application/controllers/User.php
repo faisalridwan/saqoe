@@ -86,6 +86,7 @@ class User extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/index', array_merge($data, ['event' => $event]));
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 
     public function profile()
@@ -103,6 +104,7 @@ class User extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/profile', ['event' => $event]);
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 
     public function edit()
@@ -117,6 +119,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/edit', $data, ['event' => $event]);
             $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
         } else {
             $new_image = null;
             $upload_image = $_FILES['image']['name'];
@@ -161,6 +164,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/harianPemasukan', ['event' => $event]);
             $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
         } else {
 
             $data = [
@@ -211,6 +215,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/harianPengeluaran', ['event' => $event]);
             $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
         } else {
 
             $data = [
@@ -301,6 +306,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/eventPemasukan', $data, ['event' => $event]);
             $this->load->view('templates/user_footer', ['event' => $event]);
+            $this->load->view("templates/user_content", ['event' => $event]);
         } else {
 
             $data = [
@@ -348,6 +354,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/eventPemasukan', $data, ['event' => $event]);
             $this->load->view('templates/user_footer', ['event' => $event]);
+            $this->load->view("templates/user_content", ['event' => $event]);
         }
     }
 
@@ -384,6 +391,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/eventPengeluaran', $data, ['event' => $event]);
             $this->load->view('templates/user_footer', ['event' => $event]);
+            $this->load->view("templates/user_content", ['event' => $event]);
         } else {
 
             $data = [
@@ -432,6 +440,7 @@ class User extends CI_Controller
             $this->load->view('templates/user_header', $data);
             $this->load->view('user/eventPengeluaran', $data, ['event' => $event]);
             $this->load->view('templates/user_footer', ['event' => $event]);
+            $this->load->view("templates/user_content", ['event' => $event]);
         }
     }
 
@@ -449,6 +458,7 @@ class User extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/historyHarian', array_merge($data, ['event' => $event]));
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 
     public function historyEvent()
@@ -465,5 +475,6 @@ class User extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/historyEvent', array_merge($data, ['event' => $event]));
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 }

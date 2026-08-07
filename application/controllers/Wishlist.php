@@ -22,6 +22,7 @@ class Wishlist extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('user/wishlist', $data);
         $this->load->view('templates/user_footer');
+            $this->load->view("templates/user_content");
     }
 
     public function tambah()
